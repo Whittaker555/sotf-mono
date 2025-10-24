@@ -1,9 +1,11 @@
-name: Deploy Api
+name: Deploy API
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'sotf-api/**'
   workflow_dispatch:
 
 jobs:
@@ -14,13 +16,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Dependencies
-        run: (cd app && yarn)
+        run: (cd sotf-api/app && yarn)
 
       - name: Build
-        run: (cd app && yarn build)
+        run: (cd sotf-api/app && yarn build)
 
       - name: Zip
-        run: (cd app/build && zip -r ../api.zip .)
+        run: (cd sotf-api/app/build && zip -r ../api.zip .)
 
       - name: Deploy to AWS
         uses: appleboy/lambda-action@v0.1.9
@@ -29,5 +31,5 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_KEY_ID }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: sotf-api
-          zip_file: app/api.zip
+          zip_file: sotf-api/app/api.zip
           handler: api/index.handler 
