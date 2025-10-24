@@ -1,0 +1,33 @@
+name: Deploy Api
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: (cd app && yarn)
+
+      - name: Build
+        run: (cd app && yarn build)
+
+      - name: Zip
+        run: (cd app/build && zip -r ../api.zip .)
+
+      - name: Deploy to AWS
+        uses: appleboy/lambda-action@v0.1.9
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_KEY_ID }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: sotf-api
+          zip_file: app/api.zip
+          handler: api/index.handler 
