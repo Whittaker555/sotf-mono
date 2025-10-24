@@ -19,7 +19,6 @@ interface PlaylistItem {
 }
 router.post("/", async (req: Request, res: Response) => {
   try {
-    console.log("Request body:", req.body);
     const { userId, playlistId } = req.body;
 
     if (!userId) {
