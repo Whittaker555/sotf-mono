@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
 interface SpotifyPlaylistItem {
   id: string;
@@ -108,19 +108,15 @@ export async function DELETE(req: NextRequest) {
   try {
     const { playlistId }: { playlistId: string } = await req.json();
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/user`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/user/${token.name}/${playlistId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        userId: token.name,
-        playlistId,
-      }),
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      throw new Error("Error:" + response.statusText);
     }
 
     const data = await response.json();

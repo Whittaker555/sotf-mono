@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "export AWS_PROFILE=\"george\" && next dev",
+    "dev:debug": "export AWS_PROFILE=\"george\" && NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

@@ -1,0 +1,49 @@
+{
+  "folders": [
+    {
+      "name": "Frontend (sotf)",
+      "path": "./sotf/app"
+    },
+    {
+      "name": "API (sotf-api)",
+      "path": "./sotf-api/app"
+    },
+    {
+      "name": "Poller (sotf-poller)",
+      "path": "./sotf-poller/app"
+    },
+    {
+      "name": "Root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.suggest.autoImports": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "files.exclude": {
+      "**/.next": true,
+      "**/node_modules": true,
+      "**/.terraform": true,
+      "**/build": true
+    },
+    "search.exclude": {
+      "**/.next": true,
+      "**/node_modules": true,
+      "**/package-lock.json": true,
+      "**/.terraform": true,
+      "**/build": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.vscode-typescript-next",
+      "bradlc.vscode-tailwindcss",
+      "hashicorp.terraform",
+      "ms-vscode.vscode-json"
+    ]
+  }
+}
